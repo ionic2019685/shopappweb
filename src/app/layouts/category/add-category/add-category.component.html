@@ -1,0 +1,48 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" #addProductForm="ngForm" (ngSubmit)="createCategory(addProductForm)">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="name"> Name</label>
+                            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="category.name" placeholder="Category Name" value="" required>
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-12">
+                        <label for="description">Description
+                <span class="text-muted">(Optional)</span>
+              </label>
+                        <textarea type="text" class="form-control" id="description" placeholder="Product Description" name="description" [(ngModel)]="category.description"></textarea>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="productImageUrl">Category Image</label>
+                        <input type="text" class="form-control" id="productImageUrl" [(ngModel)]="category.imageUrl" name="imageUrl" placeholder="Image Url" required>
+                    </div>
+                    <div class="mb-3">
+
+                        <label for="productImageUrl">Telecharger une image</label>
+                        <input type="file" (change)="detectFiles($event)" class="form-control" id="imageUrl" [(ngModel)]="category.imageUrl" name="imageUrl" placeholder="Image Url" accept="image/*" required>
+                        <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+                    </div>
+                    <hr class="mb-4">
+
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<br>
+<div class="container">
+    <div class="row" *ngIf="authService.isAdmin()">
+        <div class="col-sm">
+            <div class="float-right">
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#exampleModalLong">
+          Add Category
+        </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="brand_select">By Brands:</label>
+                <select class="form-control" name="" id="brand_select" [(ngModel)]="selectedBrand">
+          <option *ngFor="let brand of brands" [ngValue]="brand">{{brand}}</option>
+        </select>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+
+            <div class="container">
+                <app-card-loader [loop]="3" [height]="800" *ngIf="loading"></app-card-loader>
+                <div class="row" *ngIf="!loading">
+                    <!-- List of Products -->
+                    <div class="col-sm-4 mb-2" *ngFor="let category of categoryList  | paginate: { itemsPerPage: 6, currentPage: page }">
+                        <div class="item">
+                            <div class=" mb-r">
+                                <!--Card-->
+                                <div class="card card-cascade wider">
+                                    <!--Card image-->
+                                    <a [routerLink]="['/category', category.$key]">
+                                        <div class="view overlay hm-white-slight">
+                                            <img [src]="category.imageUrl" class="img-fluid" alt="" width="360px" height="640px">
+
+                                            <a>
+                                                <div class="mask waves-effect waves-light" mdbRippleRadius></div>
+                                            </a>
+                                        </div>
+                                    </a>
+                                    <!--/.Card image-->
+                                    <!--Card content-->
+                                    <div class="card-body text-center no-padding">
+                                        <!--Category & Title-->
+
+                                        <p class="card-title">
+                                            <strong>
+                        <a [routerLink]="['/category', category.$key]" routerLinkActive="router-link-active">{{
+                            category.name }}</a>
+                      </strong>
+                                        </p>
+                                        <!--Description-->
+                                        <p class="card-text">{{ category.description }}
+                                        </p>
+                                        <!--Card footer-->
+                                        <div class="card-footer">
+                                            <span class="right">
+                        
+                        <a placement="top" mdbTooltip="Remove Category" container="body" *ngIf="authService.isAdmin()"
+                          (click)="removeCategory(category.$key)">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      </span>
+                                        </div>
+
+                                    </div>
+                                    <!--/.Card content-->
+
+                                </div>
+                                <!--/.Card-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="text-center mt-3">
+                    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+    </div>
+</div>
+<app-add-category></app-add-category>
