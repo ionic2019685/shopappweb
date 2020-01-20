@@ -1,1 +1,53 @@
-<p>category-detail works!</p>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="product-image">
+                <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+                    <img [src]="category.imageUrl" [alt]="category.name" width="100%" class="img-fluid rounded">
+                </div>
+                <div class="" style="margin-top:15px">
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Total Article</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">2</span>
+                        </li>
+                    </ul>
+                    <button *ngIf="!isUpdate && authService.isLoggedIn()" class="btn btn-primary" (click)="isUpdate = !isUpdate">Modifier</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="product-detail">
+                <h5 class="product-head">Category Details</h5>
+                <table class="table" cellspacing="0" style="max-height: 28px">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Nom</th>
+                            <td *ngIf="!isUpdate">{{category.name}}</td>
+                            <td *ngIf="isUpdate"><input type="text" class="form-control" id="name" name="name" [(ngModel)]="category.name" placeholder="Category Name" value="" required></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Product Description</th>
+                            <td *ngIf="!isUpdate">{{category.description}}</td>
+                            <td *ngIf="isUpdate"> <textarea type="text" class="form-control" id="description" placeholder="Product Description" name="description" [(ngModel)]="category.description"></textarea></td>
+                        </tr>
+                        <tr *ngIf="isUpdate">
+                            <th scope="row"></th>
+                            <td><button class="btn btn-primary" (click)="editCategory(category)">Modifier</button> &nbsp;
+                                <button class="btn btn-danger" (click)="isUpdate = !isUpdate">Annuler</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <app-product-associate *ngIf="category.$key" [categoryId]="category.$key"></app-product-associate>
+        </div>
+    </div>
+</div>

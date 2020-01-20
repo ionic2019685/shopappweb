@@ -18,7 +18,7 @@ import { SharedModule } from "../../shared/shared.module";
 import { FavouriteProductsComponent } from "./favourite-products/favourite-products.component";
 import { CartProductsComponent } from "./cart-products/cart-products.component";
 import { CartCalculatorComponent } from "./cart-calculator/cart-calculator.component";
-
+import { ProductAssociateComponent } from './product-associate/product-associate.component';
 @NgModule({
 	imports: [CommonModule, RouterModule.forChild(ProductRoutes), SharedModule, CheckoutModule],
 	declarations: [
@@ -29,8 +29,9 @@ import { CartCalculatorComponent } from "./cart-calculator/cart-calculator.compo
 		ProductDetailComponent,
 		FavouriteProductsComponent,
 		CartProductsComponent,
+		ProductAssociateComponent,
 		CartCalculatorComponent
 	],
-	exports: [BestProductComponent]
+	exports: [ProductAssociateComponent, BestProductComponent]
 })
 export class ProductModule { }

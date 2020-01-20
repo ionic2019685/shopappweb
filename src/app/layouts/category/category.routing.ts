@@ -11,7 +11,7 @@ export const CategoryRoutes: Routes = [
 				component: CategoryListComponent
 			},
 			{
-				path: 'category/:id',
+				path: ':id',
 				component: CategoryDetailComponent
 			}
 		]

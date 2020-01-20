@@ -7,6 +7,7 @@ import { CategoryRoutes } from './category.routing';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { ProductModule } from '../product/product.module';
 @NgModule({
   declarations: [CategoryComponent,
     CategoryListComponent,
@@ -15,6 +16,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
   ],
   imports: [
     CommonModule,
+    ProductModule,
      RouterModule.forChild(CategoryRoutes),
     SharedModule
   ]

@@ -3,9 +3,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../shared/services/product.service';
 import { ToastrService } from 'src/app/shared/services/toastr.service';
+// tslint:disable
 @Component({
-	selector: 'app-product-detail',
-	templateUrl: './product-detail.component.html',
+	selector : 'app-product-detail',
+	templateUrl : './product-detail.component.html',
+	
 	styleUrls: [ './product-detail.component.scss' ]
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {

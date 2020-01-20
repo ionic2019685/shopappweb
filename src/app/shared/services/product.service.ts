@@ -13,7 +13,7 @@ export class ProductService {
 	// favouriteProducts
 	favouriteProducts: AngularFireList<FavouriteProduct>;
 	cartProducts: AngularFireList<FavouriteProduct>;
-
+	associateProducts: AngularFireList<Product>;
 	// NavbarCounts
 	navbarCartCount = 0;
 	navbarFavProdCount = 0;
@@ -50,6 +50,13 @@ export class ProductService {
 		this.products.remove(key);
 	}
 
+	// Get Favourite Product based on userId
+	getProductByCategory(key) {
+		this.associateProducts = this.db.list('products', (ref) =>
+			ref.orderByChild('productCategory').equalTo(key)
+		);
+		return this.associateProducts;
+	}
 	/*
    ----------  Favourite Product Function  ----------
   */
