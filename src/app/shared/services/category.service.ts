@@ -32,10 +32,9 @@ export class CategoryService {
 	}
 
 	updateCategory(data: Category) {
-		console.log(data);
 		const key = data.$key;
 		delete data.$key;
-		this.db.object('category/' + key).update(data);
+		return this.db.object('category/' + key).update(data);
 	}
 
 	deleteCategory(key: string) {

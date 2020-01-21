@@ -43,7 +43,9 @@ export class ProductService {
 	}
 
 	updateProduct(data: Product) {
-		this.products.update(data.$key, data);
+		const key = data.$key;
+		delete data.$key;
+		return this.db.object('products/' + key).update(data);
 	}
 
 	deleteProduct(key: string) {
@@ -160,27 +162,28 @@ export class ProductService {
 	calculateLocalCartProdCounts() {
 		this.navbarCartCount = this.getLocalCartProducts().length;
 	}
-	
- 	uploadFile(file: File) {
-    return new Promise(
-      (resolve, reject) => {
-		  
-        const almostUniqueFileName = Date.now().toString();
-		const filePath = 'images/product' + almostUniqueFileName + file.name;
-		const fileRef = this.storage.ref(filePath);
-		const task = this.storage.upload(filePath, file);
 
-    // observe percentage changes
-    const uploadPercent = task.percentageChanges();
-    // get notified when the download URL is available
-    task.snapshotChanges()
-    .subscribe((res)=>{
-		let downloadURL = fileRef.getDownloadURL();
-		resolve(downloadURL);}
-		); 
-      }
-    );
-}
+	uploadFile(file: File) {
+		return new Promise(
+			(resolve, reject) => {
+
+				const almostUniqueFileName = Date.now().toString();
+				const filePath = 'images/product' + almostUniqueFileName + file.name;
+				const fileRef = this.storage.ref(filePath);
+				const task = this.storage.upload(filePath, file);
+
+				// observe percentage changes
+				const uploadPercent = task.percentageChanges();
+				// get notified when the download URL is available
+				task.snapshotChanges()
+					.subscribe((res) => {
+						let downloadURL = fileRef.getDownloadURL();
+						resolve(downloadURL);
+					}
+					);
+			}
+		);
+	}
 }
 
 export class FavouriteProduct {

@@ -14,21 +14,21 @@ const moment = require('moment');
 @Component({
 	selector: 'app-add-product',
 	templateUrl: './add-product.component.html',
-	styleUrls: [ './add-product.component.scss' ]
+	styleUrls: ['./add-product.component.scss']
 })
 export class AddProductComponent implements OnInit {
 	product: Product = new Product();
 	categoryList: Category[];
 	fileIsUploading = false;
-fileUrl: string;
-fileUploaded = false;
+	fileUrl: string;
+	fileUploaded = false;
 	constructor(private productService: ProductService,
-		private categoryService: CategoryService,) {}
+		private categoryService: CategoryService) { }
 
 	ngOnInit() {
 		this.getAllCategorys();
 	}
-		
+
 	createProduct(productForm: NgForm) {
 		productForm.value['productId'] = 'PROD_' + shortId.generate();
 		productForm.value['productAdded'] = moment().unix();
@@ -36,9 +36,9 @@ fileUploaded = false;
 		if (productForm.value['productImageUrl'] === undefined) {
 			productForm.value['productImageUrl'] = 'http://via.placeholder.com/640x360/007bff/ffffff';
 		}
-if (this.fileUrl !== undefined && this.fileUrl !== "") {
-	
-}
+		if (this.fileUrl !== undefined && this.fileUrl !== "") {
+
+		}
 		productForm.value['favourite'] = false;
 
 		const date = productForm.value['productAdded'];
@@ -51,35 +51,35 @@ if (this.fileUrl !== undefined && this.fileUrl !== "") {
 
 		toastr.success('product ' + productForm.value['productName'] + 'is added successfully', 'Product Creation');
 	}
-	
-	detectFiles(event) {
-    this.onUploadFile(event.target.files[0]);
-}
 
-getAllCategorys() {
-	const x = this.categoryService.getCategorys();
-	x.snapshotChanges().subscribe(
-		(product) => {
-			// this.spinnerService.hide();
-			this.categoryList = [];
-			product.forEach((element) => {
-				const y = element.payload.toJSON();
-				y['$key'] = element.key;
-				this.categoryList.push(y as Category);
-			});
-		},
-		(err) => {
-		}
-	);
-}
-onUploadFile(file: File) {
-    this.fileIsUploading = true;
-    this.productService.uploadFile(file).then(
-      (url: string) => {
-        this.fileUrl = url;
-        this.fileIsUploading = false;
-        this.fileUploaded = true;
-      }
-    );
-}
+	detectFiles(event) {
+		this.onUploadFile(event.target.files[0]);
+	}
+
+	getAllCategorys() {
+		const x = this.categoryService.getCategorys();
+		x.snapshotChanges().subscribe(
+			(product) => {
+				// this.spinnerService.hide();
+				this.categoryList = [];
+				product.forEach((element) => {
+					const y = element.payload.toJSON();
+					y['$key'] = element.key;
+					this.categoryList.push(y as Category);
+				});
+			},
+			(err) => {
+			}
+		);
+	}
+	onUploadFile(file: File) {
+		this.fileIsUploading = true;
+		this.productService.uploadFile(file).then(
+			(url: string) => {
+				this.fileUrl = url;
+				this.fileIsUploading = false;
+				this.fileUploaded = true;
+			}
+		);
+	}
 }
