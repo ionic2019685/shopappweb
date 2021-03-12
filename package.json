@@ -35,7 +35,7 @@
     "font-awesome": "^4.7.0",
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.4.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "ngx-content-loading": "^0.1.3",
